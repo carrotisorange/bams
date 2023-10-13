@@ -10,4 +10,12 @@ class Service extends Model
     use HasFactory;
 
     protected $table = 'services';
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'service',
+        'price',
+        'description'
+    ];
 }

@@ -27,7 +27,7 @@ Route::get('/', function(){
 //routes for the service controller
 Route::get('/services',[ServiceController::class, 'index']);
 Route::get('/service/{id}',[ServiceController::class, 'show']);
-Route::get('/service/',[ServiceController::class, 'create']);
+Route::get('/service',[ServiceController::class, 'create']);
 Route::get('/service/{id}/edit', [ServiceController::class, 'edit']);
 
 Route::post('/service', [ServiceController::class, 'store']);

@@ -37,11 +37,14 @@
                     <!-- Left Side Of Navbar -->
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="/home">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/services">Services</a>
                     </li>
 
 
-                 <li class="nav-item dropdown">
+                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Services
                     </a>
@@ -49,7 +52,7 @@
                         <li><a class="dropdown-item" href="/funeral">Funeral</a></li>
                         <li><a class="dropdown-item" href="/memorabilias">Others</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
                 </ul>
 
