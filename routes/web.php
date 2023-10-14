@@ -26,6 +26,7 @@ Route::get('/', function(){
 
 //routes for the service controller
 Route::get('/services',[ServiceController::class, 'index']);
+
 Route::get('/service/{id}',[ServiceController::class, 'show']);
 Route::get('/service',[ServiceController::class, 'create']);
 Route::get('/service/{id}/edit', [ServiceController::class, 'edit']);
@@ -33,3 +34,6 @@ Route::get('/service/{id}/edit', [ServiceController::class, 'edit']);
 Route::post('/service', [ServiceController::class, 'store']);
 Route::put('/service/{id}/edit', [ServiceController::class, 'update']);
 Route::delete('/service/{id}', [ServiceController::class, 'destroy']);
+
+//ui and ux stuff
+Route::post('/services/search/', [ServiceController::class, 'search']);
