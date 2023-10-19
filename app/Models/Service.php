@@ -13,9 +13,14 @@ class Service extends Model
 
     public $timestamps = false;
 
+    protected $attributes = [
+        'image' => 'public/images/noimagefound.jpg'
+    ];
+
     protected $fillable = [
         'service',
         'price',
-        'description'
+        'description',
+        'image'
     ];
 }

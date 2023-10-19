@@ -7,8 +7,8 @@
                 <div class="card-header">{{ __('Create A new service') }}</div>
 
                 <div class="card-body">
-                
-                    <form action="/service" method="POST">
+
+                    <form action="/service" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{-- CSRF - CROSS SITE REQUEST FORGERY --}}
 
@@ -38,6 +38,18 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" name="image" value={{ old('image') }}>
+                    <br>
+                    @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+
                 <div class="mb-3">
                   <p class="text-right">
                     <button type="button" onclick='window.location.href = "/services"' class="btn btn-danger">Cancel</button>

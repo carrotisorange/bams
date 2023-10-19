@@ -54,7 +54,7 @@
                 </p>
 
                    <div class="card">
-                    {{-- <img src="{{ asset('/images/sample.png') }}" class="card-img-top" alt="image of the service"> --}}
+                    <img src="{{ asset('/storage/'.str_replace("public/","",$service->image)) }}" alt="..." class="img-thumbnail">
                     <div class="card-body">
                         <h5 class="card-title">{{ number_format($service->price, 2) }}</h5>
                         <p class="card-text">{{$service->description}}</p>

@@ -9,7 +9,7 @@ class ServiceController extends Controller
 {
     // orm - object relational mapper
     public function index(){
-        $services = Service::paginate(5);
+        $services = Service::paginate(12);
 
         // SELECT * FROM bams_db.services;
         // $services = Service::all();
@@ -47,8 +47,14 @@ class ServiceController extends Controller
         $validatedInputs = $request->validate([
             'service' => ['required', 'string', 'max:11'],
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'nullable'
         ]);
+
+        //upload image
+        if($request->file('image')){
+            $validatedInputs['image'] = $request->file('image')->store('public/images');
+        }
 
         // $service = Service::create([
         //   >  'service' = $request->service,
