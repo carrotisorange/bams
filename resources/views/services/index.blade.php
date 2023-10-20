@@ -16,10 +16,11 @@
                 <div class="card-header">{{ __('Services') }}</div>
 
                 <div class="card-body">
-
+                    @if(Auth::user()->role_id==1)
                     <p class="text-right">
                         <button type="button" class="btn btn-primary" onclick='window.location.href = "/service"'>Create new service</button>
                     </p>
+                    @endif
 
                     <p>
                         {{ $services->links() }}

@@ -2,8 +2,9 @@
 
 use App\Models\Owner;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AddressController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,15 +26,20 @@ Route::get('/', function(){
 });
 
 //routes for the service controller
-Route::get('/services',[ServiceController::class, 'index']);
+Route::get('/services',[ServiceController::class, 'index'])->middleware('verified');
 
-Route::get('/service/{id}',[ServiceController::class, 'show']);
-Route::get('/service',[ServiceController::class, 'create']);
-Route::get('/service/{id}/edit', [ServiceController::class, 'edit']);
+Route::get('/service/{id}',[ServiceController::class, 'show'])->middleware('verified');
+Route::get('/service',[ServiceController::class, 'create'])->middleware('verified');
+Route::get('/service/{id}/edit', [ServiceController::class, 'edit'])->middleware('verified');
 
-Route::post('/service', [ServiceController::class, 'store']);
-Route::put('/service/{id}/edit', [ServiceController::class, 'update']);
-Route::delete('/service/{id}', [ServiceController::class, 'destroy']);
+Route::post('/service', [ServiceController::class, 'store'])->middleware('verified');
+Route::put('/service/{id}/edit', [ServiceController::class, 'update'])->middleware('verified');
+Route::delete('/service/{id}', [ServiceController::class, 'destroy'])->middleware('verified');
 
 //ui and ux stuff
-Route::post('/services/search/', [ServiceController::class, 'search']);
+Route::post('/services/search/', [ServiceController::class, 'search'])->middleware('verified');
+
+
+Route::get('/select-a-role', [RegisterController::class, 'select_a_role']);
+
+Route::get('/register/{id}', [RegisterController::class, 'register_role']);

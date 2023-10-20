@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -37,44 +38,54 @@ class ServiceController extends Controller
     }
 
     public function create(){
-        return view('services.create');
+        if(Auth::user()->role_id==1){
+            return view('services.create');
+        }else{
+            abort(404);
+        }
     }
 
     public function store(Request $request){
         // INSERT INTO services (service,price,description)
         // VALUES ('service 4', 1000, 'Service 4 Description');
         //validate the input
-        $validatedInputs = $request->validate([
-            'service' => ['required', 'string', 'max:11'],
-            'price' => 'required',
-            'description' => 'required',
-            'image' => 'nullable'
-        ]);
 
-        //upload image
-        if($request->file('image')){
-            $validatedInputs['image'] = $request->file('image')->store('public/images');
+         $validatedInputs = $request->validate([
+                'service' => ['required', 'string', 'max:11'],
+                'price' => 'required',
+                'description' => 'required',
+                'image' => 'nullable | mimes:jpg,jpeg,png | max:10240' //1MB = 1024KB
+            ]);
+
+            //upload image
+            if($request->file('image')){
+                $validatedInputs['image'] = $request->file('image')->store('public/images');
+            }
+
+
+        try{
+            $service = Service::create($validatedInputs);
         }
-
-        // $service = Service::create([
-        //   >  'service' = $request->service,
-        //     'price' => $request->price,
-        //     'description' => $request->description
-        // ]);
-
-        $service = Service::create($validatedInputs);
+        catch(\Exception $e){
+            ddd($e);
+        }
 
         return redirect('/service/'.$service->id)->with('success', 'Success!');
 
     }
 
     public function edit($id){
-        // SELECT * FROM bams_db.services WHERE id = 1;
-        $service = Service::find($id);
+          if(Auth::user()->role_id==1){
+              $service = Service::find($id);
 
-        return view('services.edit',[
-            'service' => $service
-        ]);
+              return view('services.edit',[
+              'service' => $service
+              ]);
+          }else{
+            abort(404);
+          }
+        // SELECT * FROM bams_db.services WHERE id = 1;
+
     }
 
     public function update($id, Request $request){

@@ -14,6 +14,7 @@
                             </button>
                         </div>
                         @auth
+                        @if(Auth::user()->role_id==1)
                         <div class="col-sm">
                           <button type="button" class="btn btn-primary" onclick='window.location.href = "/service/{{ $service->id }}/edit"'>Edit
                             Service</button>
@@ -24,6 +25,7 @@
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Delete Service
                     </button>
+                    @endif
                     @endauth
 
                 <!-- Modal -->
