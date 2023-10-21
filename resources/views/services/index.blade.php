@@ -2,18 +2,33 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="mb-3">
-                <form action="/services/search/" method="POST">
-                    @csrf
-                    <input type="text" class="form-control" name="search" id="exampleFormControlInput1" placeholder="Search for service...">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                    {{-- <a href="https://kodego.ph/" target="_blank">click me!</a> --}}
-                </form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form id="searchForm" action="/services/search/" method="POST">
+                                @csrf
+                                <input type="text" class="form-control" name="search" id="exampleFormControlInput1"
+                                    placeholder="Search for service...">
+
+                                {{-- <a href="https://kodego.ph/" target="_blank">click me!</a> --}}
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <button form="searchForm" type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <p>
+                {{ $services->links() }}
+                Showing {{ $services->count() }} results...
+            </p>
             <div class="card">
 
-                <div class="card-header">{{ __('Services') }}</div>
+                {{-- <div class="card-header">{{ __('Services') }}</div> --}}
 
                 <div class="card-body">
                     @if(Auth::user()->role_id==1)
@@ -22,9 +37,7 @@
                     </p>
                     @endif
 
-                    <p>
-                        {{ $services->links() }}
-                    </p>
+
                     {{-- <table class="table">
                         <thead>
                             <tr>
@@ -51,9 +64,9 @@
                         <div class="row">
                             @foreach ($services as $service)
                             <br><br>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <br><br>
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 100%; height: 500px">
                                      <a href="/service/{{ $service->id }}"><img class="card-img-top" src="{{ asset('/storage/'.str_replace("public/","",$service->image)) }}" alt="Image of the service"></a>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $service->service }}</h5>
@@ -68,11 +81,7 @@
                         </div>
                     </div>
 
-                    @if(session('success'))
-                    <h6 class="alert alert-success">
-                        {{ session('success') }}
-                    </h6>
-                    @endif
+                 
                 </div>
             </div>
         </div>

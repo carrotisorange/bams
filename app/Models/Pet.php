@@ -12,4 +12,10 @@ class Pet extends Model
     protected $table = 'pets';
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'pet_category_id',
+        'date_of_death'
+    ];
 }

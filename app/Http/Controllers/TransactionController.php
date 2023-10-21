@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
@@ -13,7 +14,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::where('owner_id', Auth()->user()->id)->orderBy('date', 'asc')->get();
+
+        return view('home',[
+            'transactions' => $transactions
+        ]);
     }
 
     /**

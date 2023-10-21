@@ -2,7 +2,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+
         <div class="col-md-8">
+            <button type="button" class="btn btn-primary" onclick='window.location.href = "/services"'>Back
+                    </button>
+                    <br><br>
             <div class="card">
                 <div class="card-header">{{ $service->service }}</div>
 
@@ -10,8 +14,7 @@
                 <p class="text-right">
                     <div class="row g-3">
                            <div class="col-sm">
-                          <button type="button" class="btn btn-primary" onclick='window.location.href = "/services"'>Back
-                            </button>
+
                         </div>
                         @auth
                         @if(Auth::user()->role_id==1)
@@ -60,7 +63,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ number_format($service->price, 2) }}</h5>
                         <p class="card-text">{{$service->description}}</p>
-                        <a href="#" class="btn btn-primary">Avail</a>
+                        <a href="/service/{{ $service->id }}/pet" class="btn btn-primary">Avail Now</a>
                     </div>
                 </div>
                 @if(session('success'))

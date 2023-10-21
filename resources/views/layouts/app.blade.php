@@ -40,12 +40,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/home">Dashboard</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/services">Services</a>
+                        <a class="nav-link" aria-current="page" href="/services">Services</a>
                     </li>
+
+                    <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/home">Transactions</a>
+                        </li>
 
 
                  {{-- <li class="nav-item dropdown">
@@ -98,9 +102,14 @@
                 </div>
             </div>
         </nav>
-
+        @if(session('success'))
+        <h6 class="alert alert-success">
+            {{ session('success') }}
+        </h6>
+        @endif
         <main class="py-4">
             @yield('content')
+           
         </main>
     </div>
 

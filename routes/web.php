@@ -4,8 +4,8 @@ use App\Models\Owner;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ServiceController;
-
-
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,11 +19,11 @@ use App\Http\Controllers\ServiceController;
 //default routes
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::get('/home', [TransactionController::class, 'index'])->name('home')->middleware('verified');
 
 Route::get('/', function(){
     return view('auth.login');
-});
+})->middleware('guest');
 
 //routes for the service controller
 Route::get('/services',[ServiceController::class, 'index'])->middleware('verified');
@@ -43,3 +43,13 @@ Route::post('/services/search/', [ServiceController::class, 'search'])->middlewa
 Route::get('/select-a-role', [RegisterController::class, 'select_a_role']);
 
 Route::get('/register/{id}', [RegisterController::class, 'register_role']);
+
+
+// Route::get('/service/{id}',[ServiceController::class, 'show'])->middleware('verified');
+Route::get('/service/{serviceId}/pet',[PetController::class, 'create'])->middleware('verified');
+Route::post('/service/{serviceId}/pet', [PetController::class, 'store'])->middleware('verified');
+// Route::get('/service/{id}/edit', [ServiceController::class, 'edit'])->middleware('verified');
+
+// Route::post('/service', [ServiceController::class, 'store'])->middleware('verified');
+// Route::put('/service/{id}/edit', [ServiceController::class, 'update'])->middleware('verified');
+// Route::delete('/service/{id}', [ServiceController::class, 'destroy'])->middleware('verified');
